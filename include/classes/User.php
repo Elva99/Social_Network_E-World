@@ -29,6 +29,11 @@ class User{
 		return $row['first_name']." ".$row['last_name'];
 	}
 
+	public function getProfilePicture()
+	{
+		return $this->user['profile_picture'];
+	}
+
 	public function isClosed()
 	{
 		$username=$this->user['username'];
@@ -36,6 +41,20 @@ class User{
 		$row=mysqli_fetch_array($query);
 
 		if ($row['user_closed']=='yes')
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public function isFriend($username_to_check)
+	{
+		$usernameComma=",".$username_to_check.",";
+
+		if (strstr($this->user['friends_array'],$usernameComma) || $username_to_check==$this->user['username'])
 		{
 			return true;
 		}
