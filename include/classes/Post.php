@@ -215,6 +215,7 @@ class Post{
 
 									<div class='newsFeedPostOptions'>
 										Comments($comment_check_num)&nbsp;&nbsp;&nbsp;&nbsp;
+										<iframe src='like.php?post_id=$id' id='like_frame' scrolling='no' method='POST'></iframe>
 									</div>
 								</div>
 								<div class='post_comment' id='toggleComment$id' style='display: none;'>

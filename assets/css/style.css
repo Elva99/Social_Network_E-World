@@ -94,5 +94,48 @@ textarea#post_text{
 	float:left;
 	margin-right:15px;
 }
-
+.comment_section img{
+	height:30px;
+	width:30px;
+	float:left;
+	display:inline;
+	margin-right:3px;
+}
+iframe#comment_iframe{
+	width: 100%;
+    border: none;
+    margin-top: 10px;
+    min-height: 40px;
+}
+#comment_textarea{
+	width:60%;
+}
+#comment_submit_button{
+	background-color: #2489d1;
+	border: 1px solid #a3a8a8;
+	border-radius: 5px;
+	color: #fff;
+}
+.newsFeedPostOptions{
+	padding: 0px;
+	text-decoration: none;
+	color:#1579f6;
+	border: none;
+}
+iframe#like_frame{
+	border: white;
+    height: 16px;
+    width: 170px;
+}
+input.comment_like {
+    font-size: 1rem;
+    font-weight: 400;
+    background-color: white;
+    border: none;
+    color:#1579f6;
+}
+.like_value {
+    display: inline;
+}
+}
 
