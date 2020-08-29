@@ -63,5 +63,63 @@ class User{
 			return false;
 		}
 	}
+
+	//check if this user received the request from $user_from
+	public function didReceiveFriendRequest($user_from)
+	{
+		$user_to=$this->user['username'];
+		$check_request_query=mysqli_query($this->con,"SELECT * FROM friend_requests WHERE user_from='$user_from' AND user_to='$user_to'");
+		$check_request_num=mysqli_num_rows($check_request_query);
+		if ($check_request_num>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	//check if this user sent the request to $user_to
+	public function didSendFriendRequest($user_to)
+	{
+		$user_from=$this->user['username'];
+		$check_request_query=mysqli_query($this->con,"SELECT * FROM friend_requests WHERE user_from='$user_from' AND user_to='$user_to'");
+		$check_request_num=mysqli_num_rows($check_request_query);
+		if ($check_request_num>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	//remove friends
+	public function removeFriend($user_to_remove)
+	{
+		$loggedin_user=$this->user['username'];
+
+		//remove the friend from the loggedin user friend list
+		$userloggedin_friend_array=$this->user['friends_array'];
+		$userloggedin_new_friend_array=str_replace($user_to_remove . ",", "", $userloggedin_friend_array);
+		mysqli_query($this->con,"UPDATE users SET friends_array='$userloggedin_new_friend_array' WHERE username='$loggedin_user'");
+
+		//remove the loggedin user from $user_to_remove friend list
+		$query=mysqli_query($this->con,"SELECT friends_array FROM users WHERE username='$user_to_remove'");
+		$row=mysqli_fetch_array($query);
+		$friend_array=$row['friends_array'];
+		$new_friend_array=str_replace($loggedin_user . ",", "", $friend_array);
+		mysqli_query($this->con,"UPDATE users SET friends_array='$new_friend_array' WHERE username='$user_to_remove'");
+
+	}
+
+	public function sendRequest($user_to)
+	{
+		$loggedin_user=$this->user['username'];
+		mysqli_query($this->con,"INSERT INTO friend_requests (user_from, user_to) VALUES ('$loggedin_user', '$user_to')");
+	}
+
+
 }
 ?>

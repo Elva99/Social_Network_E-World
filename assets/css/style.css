@@ -137,5 +137,30 @@ input.comment_like {
 .like_value {
     display: inline;
 }
+
+.profile_left{
+	height: 100vh;
+    background-color: #46aedb;
+    color: white;
+    width: 20%;
+    border-radius: 8px;
+    border-right:5px solid #1e698a;
+}
+
+.profile_left img{
+	    margin-left: 20%;
+    	margin-top: 20px;
+    	border-radius: 100%;
+    	border:3px solid #1e698a;
+}
+
+.profile_info{
+	    margin-top: 20px;
+    	padding-left: 30%;
+    	background-color: #1e698a
+}
+}
+
+
 }
 
