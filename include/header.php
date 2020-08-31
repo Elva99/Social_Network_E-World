@@ -21,11 +21,11 @@ else
 <head>
 	<title>Welcome</title>
 	<!-- js -->
-  <!--
+ 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 	<script src="assets/js/bootstrap.js"></script>
-  -->
+
 	<!-- css -->
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
@@ -38,7 +38,7 @@ else
     <a class="navbar-brand" href="#">E-World</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="<?php echo $userloggedin;?>"><?php echo $user['first_name']." ".$user['last_name']; ?></a>

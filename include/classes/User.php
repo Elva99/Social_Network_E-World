@@ -29,6 +29,11 @@ class User{
 		return $row['first_name']." ".$row['last_name'];
 	}
 
+	public function getFriendsArray()
+	{
+		return $this->user['friends_array'];
+	}
+
 	public function getProfilePicture()
 	{
 		return $this->user['profile_picture'];
