@@ -1,7 +1,7 @@
 <?php
 //OOP. create a user object
 class Post{
-	private $user_obj;
+	private $user_obj;// the user_from
 	private $con;
 
 	public function __construct($con,$user)
@@ -70,7 +70,7 @@ class Post{
 				{
 					$user_to_obj=new User($this->con,$row['user_to']);
 					$user_to_name=$user_to_obj->getFirstAndLastName();
-					$user_to="to <a href=>'". $row['user_to']."'>".$user_to_name."</a>";
+					$user_to="to <a href='". $row['user_to']."'>".$user_to_name."</a>";
 				}
 
 				//check of user who posted, has their account closed
@@ -78,8 +78,17 @@ class Post{
 				if (!($added_by_obj->isClosed()))
 				{
 					//check if the user who added the post is the fiend of the user logged in
-					if ($this->user_obj->isFriend($added_by))
+					if ($this->user_obj->isFriend($added_by))	
 					{
+						//add a delete botton if userloggedin==added_by
+						if($this->user_obj->getUsername()==$added_by)
+						{
+							$delete_button="<button class='delete_button btn-danger' id='post$id'>X</button>";
+						}else
+						{
+							$delete_button="";
+						}
+
 						$user_details_query=mysqli_query($this->con,"SELECT first_name,last_name,profile_picture FROM users
 							WHERE username='$added_by'");
 						$user_row=mysqli_fetch_array($user_details_query);
@@ -206,6 +215,7 @@ class Post{
 									<div class='posted_by' style='color: #ACACAC;'>
 										<a href='$added_by'> $first_name $last_name</a> $user_to &nbsp;&nbsp;&nbsp;&nbsp;
 										$time_message
+										$delete_button
 									</div>
 									<div id='post_body'>
 										$body
@@ -227,10 +237,26 @@ class Post{
 					}
 				
 				}
+				?>
+				<script>
+					//delete confirmation box
+					$(document).ready(function(){
+						//if the delete button is clicked
+						$('#post<?php echo $id; ?>').on('click',function()
+						{
+							bootbox.confirm("Are you sure you want to delete this post?",function(result){
+								//if confirm to delete, goto delelte handler
+								$.post("include/handlers/delete_post.php?post_id=<?php echo $id; ?>",{result:result});
+								if(result)
+									//refresh the page
+									location.reload();
+							});
+						});
+					});
+				</script>
+				<?php
 
-			}
-		}
-
-	
+			}//end of while loop
+		}	
 }
 ?>

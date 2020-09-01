@@ -159,8 +159,14 @@ input.comment_like {
     	padding-left: 30%;
     	background-color: #1e698a
 }
+
+.delete_button{
+	float: right;
+    margin-right: 10px;
+    border: none;
 }
 
 
-}
+
+
 

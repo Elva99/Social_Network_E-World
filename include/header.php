@@ -25,6 +25,8 @@ else
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 	<script src="assets/js/bootstrap.js"></script>
+  <script src="assets/js/bootbox.min.js"></script>
+  <script src="assets/js/demo.js"></script>
 
 	<!-- css -->
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">

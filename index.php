@@ -38,10 +38,61 @@ if (isset($_POST['post']))
 			$post=new Post($mysqli,$userloggedin);
 			$post->loadPostsFriends();
 		?>
-
+	</div>
+		<!--
+		<div class="posts_area"></div>
+		<img id="#loading" src="assets/images/icons/loading_icon.gif">
 	</div>
 
+<script type="text/javascript">
+	var userloggedin='<?php echo $userloggedin; ?>';
+	$(document).ready(function()
+	{
+		$('#loading').show();
 
+		//Original ajax request for loading first posts
+		$.ajax({
+			url: "include/handlers/ajax_load_posts.php",
+			type: "POST",
+			data: "page=1&userloggedin="+userloggedin,
+			cache:false,
 
+			success: function(data){
+				$('#loading').hide();
+				$('.posts_area').html(data);
+			}
+		})
+	});
+
+	$(window).scroll(function()
+	{
+		var height=$('.post_area').height();   //div containing posts
+		var scroll_top=$(this).scrollTop();
+		var page=$('.post_area').find('.nextPage').val();
+		var noMorePosts=$('.post_area').find('.noMorePosts').val();
+
+		//reach the bottom of the page, load more posts
+		if ((document.body.scrollHeight==document.body.scrollTop+window.innerHeight)&&noMorePosts=='false')
+		{
+			$('#loading').show();
+			var ajaxReq=$.ajax({
+			url: "include/handlers/ajax_load_posts.php",
+			type: "POST",
+			data: "page="+page+"+userloggedin"+userloggedin,
+			cache:false,
+
+			success: function(response){
+				$('.post_area').find('.nextPage').remove();  //remove current .nextPage
+				$('.post_area').find('.noMorePosts').remove();//remove current .nextPage
+				$('#loading').hide();
+				$('.posts_area').html(data);
+			}
+		});
+
+				return false;
+		}
+	});
+</script>
+-->
 </body>
 </html>
